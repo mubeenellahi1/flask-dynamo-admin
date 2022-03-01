@@ -1,0 +1,241 @@
+{% extends "base.html" %}
+{% block body %}
+    <div class="row mb-4">
+        <div class="col-lg-12 col-md-6 mb-md-0 mb-4">
+            <div class="card">
+                <div class="card-header pb-0">
+                    <div class="row">
+                        <div class="col-lg-6 col-7">
+                            <h6>Create Control</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body pb-2">                    
+                    <hr/>
+                    <form method="post"></form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+
+{% block page_js %}
+      <script type="text/javascript">
+        $('form').jsonForm({
+            schema: {
+                "family": {
+                    "title": "Control Family",
+                    "type": "string",
+                    "enum":"{% for fam in control_families %}{{fam}},{% endfor %}".slice(0, -1).split(','),
+                    "required":true
+                },
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "required":true
+                },
+                "control_label": {
+                    "title": "Control Label",
+                    "type": "string",
+                    "required":true
+                },
+                "vulnerability_label": {
+                    "title": "Vulnerability Label",
+                    "type": "string",
+                    "required":true
+                },
+                "vulnerability_level": {
+                    "title": "Vulnerability Level",
+                    "type": "string",
+                    "default":"security_model",
+                    "required":true
+                },
+                "vulnerability_type": {
+                    "title": "Vulnerability Type",
+                    "type": "string",
+                    "default":"vulnerability",
+                    "readonly":true,
+                    "required":true
+                },
+                "vulnerability_default": {
+                    "title": "Vulnerability Default",
+                    "type": "number",
+                    "required":true
+                },
+                "relevant_threats": {
+                    "title": " Vulnerability Relevant Threats",
+                    "type": "string",
+                    "enum": "{% for threat in threats %}{{threat}},{% endfor %}".slice(0, -1).split(','),
+                    "required":true
+                },
+                "vulnerability_parts": {
+                    "type": "array",
+                    "notitle":true,
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "label": {
+                                "type": "string",
+                                "title": "Label",
+                                "required": true
+                            },
+                            "parts": {
+                                "type": "array",
+                                "title":"SubParts",
+                                "items": {
+                                    "type": "object",
+                                    "title":"",
+                                    "properties": {
+                                        "key": {
+                                            "type": "string",
+                                            "title": "Key",
+                                            "required": true
+                                        },
+                                        "label": {
+                                            "type": "string",
+                                            "title": "Label",
+                                            "required": true
+                                        },
+                                        "protection_factor": {
+                                            "type": "number",
+                                            "title": "Protection Factor",
+                                            "required": true
+                                        },
+                                        "ca": {
+                                            "type": "string",
+                                            "title": "Type",
+                                            "required": true
+                                        },
+                                    }
+                                }
+                            },
+                        }
+                    }
+                },
+                "control_parts": {
+                    "type": "array",
+                    "notitle":true,
+                    "items": {
+                        "type": "object",
+                        "title":"Control Part",
+                        "properties": {
+                            "label": {
+                                "type": "string",
+                                "title": "Label",
+                                "required": true
+                            },
+                            "type": {
+                                "type": "string",
+                                "title": "Type",
+                                "required": true
+                            },
+                            "depends_on": {
+                                "type": "integer",
+                                "title": "Depends On",
+                                "description":"Enter the id of the sub part"
+                            },
+                            "parts": {
+                                "type": "array",
+                                "title":"SubParts",
+                                "items": {
+                                    "type": "object",
+                                    "title":"",
+                                    "properties": {
+                                        "key": {
+                                            "type": "string",
+                                            "title": "Key",
+                                            "required": true
+                                        },
+                                        "label": {
+                                            "type": "string",
+                                            "title": "Label",
+                                            "required": true
+                                        },
+                                    }
+                                }
+                            },
+                        }
+                    }
+                }
+            },
+            form: [
+                "family",
+                {
+                    "key":"id",
+                    "prepend":"{% raw %}{{values.family}}{% endraw %}",
+                },
+                "control_label",
+                "vulnerability_label",
+                "vulnerability_level",
+                "vulnerability_type",
+                "vulnerability_default",
+                {
+                    "key": "relevant_threats",
+                    "type": "checkboxes"
+                },
+                {
+                    "type": "fieldset",
+                    "title": "Control Parts",
+                    "expandable":true,
+                    "items": [
+                        {
+                            "key": "control_parts",
+                            "notitle":true,
+                            "items": [
+                            {
+                                "key": "control_parts[]",
+                                "title": "{% raw %}Part-{{idx}}{% endraw %}",
+                            }],
+                        },
+                    ]
+                }, 
+                {
+                    "type": "fieldset",
+                    "title": "Vulnerability Parts",
+                    "expandable":true,
+                    "items": [
+                        {
+                            "key": "vulnerability_parts",
+                            "type": "array",
+                            "items": [
+                            {
+                                "key": "vulnerability_parts[]",
+                                "title": "{% raw %}Part-{{idx}}{% endraw %}",
+                            }],
+                            "notitle":true,
+                        },
+                    ]
+                },                
+                {
+                    "type": "submit",
+                    "title": "Create Control and Vulnerability",
+                    "fieldHtmlClass": "btn btn-primary btn-block"
+                },
+            ],
+            "value": {
+                "family": "-",
+            },
+            displayErrors: function (errors, formElt) {
+                console.log(errors)
+                for (var i=0; i<errors.length; i++) {
+                  errors[i].message = "Avast! Ye best be fixin' that field!";
+                }
+                $(formElt).jsonFormErrors(errors, formObject);
+            },
+            onSubmit: function (errors, values) {
+                if (!errors)
+                    $.post(url, values, function(){});
+            }
+        });
+
+
+        $("[name=family]").on('change',function(){
+            $(".controls > .input-group > .input-group-addon").text($(this).val()+'-')
+        })
+
+        $(document).ready(function(){
+            $(".controls > .input-group > .input-group-addon").text($("[name=family]").val()+'-')
+        
+        })
+      </script>
+{% endblock %}

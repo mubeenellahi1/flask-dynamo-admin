@@ -1,0 +1,44 @@
+.form-control{
+    border: 1px grey solid;
+}
+
+.form-control:focus{
+    border: 1px grey solid;
+}
+
+.json-input{
+    display: none;
+}
+
+#form .add-on {
+    border: none;
+    background-color: inherit;
+}
+
+.expandable > legend:before {
+    content: '\25B8';
+    padding-right: 5px;
+}
+.expanded > legend:before {
+    content: '\25BE';
+}
+
+._jsonform-array-buttons {
+    margin-left: 25px;
+}
+
+.jsonform-required > label:after {
+    content: ' *';
+    color: red;
+}
+
+form.jsonform-hasrequired:after {
+    content: '* Required field';
+    display: block;
+    color: red;
+    padding-top: 1em;
+}
+
+fieldset{
+    margin-top: 30px;
+}

@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block body %}
+    <div class="row mb-4">
+        <div class="col-lg-12 col-md-6 mb-md-0 mb-4">
+            <div class="card">
+                <div class="card-header pb-0">
+                    <div class="row">
+                        <div class="col-lg-6 col-7">
+                            <h6>Create Valueset</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body pb-2">                    
+                    <hr/>
+                   
+                    <form method="post"></form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+
+{% block page_js %}
+      <script type="text/javascript">
+        $('form').jsonForm({
+            schema: {
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "required":true,
+                },
+                "key": {
+                    "title": "Key",
+                    "type": "string",
+                    "required":true,
+                },
+                "label": {
+                    "title": "Label",
+                    "type": "string",
+                    "required":true,
+                },
+                "level": {
+                    "title": "Level",
+                    "type": "string",
+                    "readonly":true,
+                    "default":"data_type"
+                },
+                "type": {
+                    "title": "Type",
+                    "type": "string",
+                    "readonly":true,
+                    "default":"code_set"
+                },
+                "parts": {
+                    "type": "array",
+                    "title":"Parts",
+                    "items": {
+                        "type": "object",
+                        "title":"Part",
+                        "properties": {
+                            "label": {
+                                "title": "Label",
+                                "type": "string",
+                                "required":true,
+                            },
+                            "key": {
+                                "title": "Key",
+                                "type": "string",
+                                "required":true,
+                            },
+                            "type": {
+                                "title": "Type",
+                                "type": "string",
+                                "required":true,
+                            },
+                            "integrity": {
+                                "title": "Integrity",
+                                "type": "number",
+                                "required":true,
+                            },
+                            "confidentiality": {
+                                "title": "Confidentiality",
+                                "type": "number",
+                                "required":true,
+                            },
+                            "availability": {
+                                "title": "Availability",
+                                "type": "number",
+                                "required":true,
+                            },
+                            
+                        }
+                    
+                    }
+                },
+            },
+            form:[
+                {
+                    "key":"id",
+                    "prepend":"VS"
+                },
+                "key",
+                "label",
+                "level",
+                "type",
+                "parts",
+                {
+                    "type": "submit",
+                    "title": "Create Valueset",
+                    "fieldHtmlClass": "btn btn-primary btn-block"
+                },
+            ],
+            displayErrors: function (errors, formElt) {
+                for (var i=0; i<errors.length; i++) {
+                  errors[i].message = "Avast! Ye best be fixin' that field!";
+                }
+                $(formElt).jsonFormErrors(errors, formObject);
+            },
+            onSubmit: function (errors, values) {
+                if (!errors)
+                    $.post(url, values, function(){});
+            }
+        });
+      </script>
+{% endblock %}

@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% block body %}
+
+
+    <div class="row mb-4">
+        <div class="col-lg-12 col-md-6 mb-md-0 mb-4">
+            <div class="card">
+                <div class="card-header pb-0">
+                    <div class="row">
+                        <div class="col-lg-6 col-7">
+                            <h6>Project Settings</h6>
+                        </div>
+                    </div>
+                </div>
+            <div class="card-body px-0 pb-2">
+                <div class="table-responsive">
+                    <table class="table align-items-center mb-0">
+                        <thead>
+                        <tr>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">class</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">id</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">level</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">group_label</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">label</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">group</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">type</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in project_settings %}
+                            <tr>
+                                <td>{{item.class}}</td>
+                                <td>{{item.id}}</td>
+                                <td>{{item.level}}</td>
+                                <td>{{item.group_label}}</td>
+                                <td>{{item.label}}</td>
+                                <td>{{item.group}}</td>
+                                <td>{{item.type}}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-lg-12 col-md-6 mb-md-0 mb-4">
+            <div class="card">
+                <div class="card-header pb-0">
+                    <div class="row">
+                        <div class="col-lg-6 col-7">
+                            <h6>Tenant Settings</h6>
+                        </div>
+                    </div>
+                </div>
+            <div class="card-body px-0 pb-2">
+                <div class="table-responsive">
+                    <table class="table align-items-center mb-0">
+                        <thead>
+                        <tr>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">class</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">id</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">level</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">group_label</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">label</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">group</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">type</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in tenant_settings %}
+                            <tr>
+                                <td>{{item.class}}</td>
+                                <td>{{item.id}}</td>
+                                <td>{{item.level}}</td>
+                                <td>{{item.group_label}}</td>
+                                <td>{{item.label}}</td>
+                                <td>{{item.group}}</td>
+                                <td>{{item.type}}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-lg-12 col-md-6 mb-md-0 mb-4">
+            <div class="card">
+                <div class="card-header pb-0">
+                    <div class="row">
+                        <div class="col-lg-6 col-7">
+                            <h6>Settings</h6>
+                        </div>
+                    </div>
+                </div>
+            <div class="card-body px-0 pb-2">
+                <div class="table-responsive">
+                    <table class="table align-items-center mb-0">
+                        <thead>
+                        <tr>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">class</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">id</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">level</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">group_label</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">label</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">group</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">type</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in project_settings %}
+                            <tr>
+                                <td>{{item.class}}</td>
+                                <td>{{item.id}}</td>
+                                <td>{{item.level}}</td>
+                                <td>{{item.group_label}}</td>
+                                <td>{{item.label}}</td>
+                                <td>{{item.group}}</td>
+                                <td>{{item.type}}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-lg-12 col-md-6 mb-md-0 mb-4">
+            <div class="card">
+                <div class="card-header pb-0">
+                    <div class="row">
+                        <div class="col-lg-6 col-7">
+                            <h6>Settings</h6>
+                        </div>
+                    </div>
+                </div>
+            <div class="card-body px-0 pb-2">
+                <div class="table-responsive">
+                    <table class="table align-items-center mb-0">
+                        <thead>
+                        <tr>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">class</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">id</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">level</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">group_label</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">label</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">group</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">type</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in project_settings %}
+                            <tr>
+                                <td>{{item.class}}</td>
+                                <td>{{item.id}}</td>
+                                <td>{{item.level}}</td>
+                                <td>{{item.group_label}}</td>
+                                <td>{{item.label}}</td>
+                                <td>{{item.group}}</td>
+                                <td>{{item.type}}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+ {% endblock body %}

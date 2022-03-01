@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% block body %}
+    <div class="row mb-4">
+        <div class="col-lg-12 col-md-6 mb-md-0 mb-4">
+            <div class="card">
+                <div class="card-header pb-0">
+                    <div class="row">
+                        <div class="col-lg-6 col-7">
+                            <h6>Create Settings</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body pb-2">                    
+                    <hr/>
+                    <form method="post"></form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+
+{% block page_js %}
+      <script type="text/javascript">
+        $('form').jsonForm({
+            schema: {
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "required":true,
+                },
+                "default": {
+                    "title": "Default",
+                    "type": "string",
+                    "enum": [ true, false,""],
+                    "required":true,
+                },
+                "group": {
+                    "title": "Group",
+                    "type": "string",
+                    "enum": [ "user_policies", "fcr_policies", "" ]
+                },
+                "group_label": {
+                    "title": "Group Label",
+                    "type": "string",
+                    "enum": [ "User Policies", "Federated Cyber-Risk Policies", "" ]
+                },
+                "key": {
+                    "title": "Key",
+                    "type": "string",
+                    "required":true,
+                },
+                "label": {
+                    "title": "Label",
+                    "type": "string",
+                    "required":true,
+                },
+                "level": {
+                    "title": "Level",
+                    "type": "string",
+                    "enum": [ "project", "tenant", "admin","fcr"],
+                    "required":true,
+                },
+                "type": {
+                    "title": "Type",
+                    "type": "string",
+                    "requred":true,
+                    "enum":[ "toggle", "cluster", "single_select" ]    ,
+                },
+                "parts": {
+                    "type": "array",
+                    "title":"Parts",
+                    "items": {
+                        "type": "object",
+                        "title":"Part",
+                        "properties": {
+                            "key": {
+                                "type": "string",
+                                "title": "Key",
+                                "required": true
+                            },
+                            "label": {
+                                "type": "string",
+                                "title": "Label",
+                                "required": true
+                            },
+                            "default": {
+                                "type": "string",
+                                "title": "Default",
+                                "enum":[true,false,""]
+                            },
+                            "type": {
+                                "type": "string",
+                                "title": "Type",
+                                "enum": ["boolean","text","cluster"],
+                                "required": true
+                            },
+                            
+                        }
+                    }
+                }
+            },
+            form: [
+                {
+                    "key":"id",
+                    "prepend":"SET"
+                },
+                {
+                    "key": "default",
+                    "titleMap": {
+                      true: "true",
+                      false: "false",
+                      "": "--------",
+                    }
+                },
+                "key",
+                "label",
+                "level",
+                {
+                    "key": "group",
+                    "titleMap": {
+                      "": "--------",
+                    }
+                },
+                {
+                    "key": "group_label",
+                    "titleMap": {
+                      "": "--------",
+                    }
+                },
+                "type",
+                "parts",
+                {
+                    "type": "submit",
+                    "title": "Create Settings",
+                    "fieldHtmlClass": "btn btn-primary btn-block"
+                },
+            ],
+            displayErrors: function (errors, formElt) {
+                console.log(errors)
+                for (var i=0; i<errors.length; i++) {
+                  errors[i].message = "Avast! Ye best be fixin' that field!";
+                }
+                $(formElt).jsonFormErrors(errors, formObject);
+            },
+            onSubmit: function (errors, values) {
+                if (!errors)
+                    $.post(url, values, function(){});
+            }
+        });
+      </script>
+{% endblock %}
