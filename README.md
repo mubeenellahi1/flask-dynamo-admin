@@ -1,4 +1,4 @@
-# sibylity-curation
+# Flask DynamoDB Admin
 
 
 # Application Structure
